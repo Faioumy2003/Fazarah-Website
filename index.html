@@ -20,7 +20,7 @@
             min-height: 100vh;
             font-family: 'Arabic Typesetting', serif;
             color: #23425a;
-            font-size: 1.55em;
+            font-size: 1.35em;
             letter-spacing: 0.1px;
         }
         .navbar {
@@ -28,19 +28,56 @@
             box-shadow: 0 3px 22px #8fd6fb33;
             border-radius: 0 0 32px 32px;
             padding: 0 32px;
+            min-height: 72px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            min-height: 72px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .navbar-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         .navbar .logo {
             color: #23425a;
-            font-size: 2.2em;
+            font-size: 2.1em;
             font-family: 'Arabic Typesetting', serif;
             font-weight: bold;
             letter-spacing: 2px;
             text-shadow: 0 2px 14px #8fd6fb66;
-            padding: 14px 0 8px 0;
+            padding: 10px 0 4px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .date-calendar-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 6px;
+            font-size: 0.89em;
+        }
+        .date-part {
+            background: #fafdff;
+            border-radius: 7px;
+            padding: 2px 11px 1px 11px;
+            text-align: center;
+            box-shadow: 0 2px 8px #8fd6fb22;
+            font-weight: bold;
+            color: #0bbb95;
+            border: 1.1px solid #0bbb95;
+            font-family: 'Arabic Typesetting', serif;
+            display: inline-block;
+        }
+        .navbar nav {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .navbar nav ul {
             display: flex;
@@ -48,10 +85,11 @@
             list-style: none;
             margin: 0;
             padding: 0;
+            flex-direction: row;
         }
         .navbar nav ul li a {
             color: #23425a;
-            font-size: 1.16em;
+            font-size: 1.08em;
             font-family: 'Arabic Typesetting', serif;
             font-weight: bold;
             text-decoration: none;
@@ -68,6 +106,30 @@
             color: #fff;
             box-shadow: 0 3px 12px #8fd6fb55;
         }
+        @media (max-width: 900px) {
+            .navbar {padding: 0 6px;}
+            .main-container {padding: 18px 5px;}
+            .sections {gap: 16px;}
+            .section {padding: 15px 6px;}
+            .navbar .logo {font-size: 1.3em;}
+        }
+        @media (max-width: 650px) {
+            .navbar {padding: 0 6px;}
+            .navbar-content {padding: 0;}
+            .navbar .logo {font-size: 1.1em;}
+            .date-calendar-row {font-size: 0.95em;}
+            .navbar nav ul {gap: 7px;}
+            .main-container {padding: 10px 2px 18px 2px;}
+            .sections {grid-template-columns: 1fr;}
+            .navbar nav {justify-content: center;}
+        }
+        @media (max-width: 480px) {
+            .main-container h1 {font-size: 1em;}
+            .section h2 {font-size: 0.9em;}
+            .section {font-size: .91em;}
+            .date-calendar-row {font-size: 0.81em;}
+            .navbar .logo {font-size: 0.98em;}
+        }
         .main-container {
             max-width: 1100px;
             margin: 40px auto 0 auto;
@@ -79,7 +141,7 @@
             z-index: 1;
         }
         .main-container h1 {
-            font-size: 2.3em;
+            font-size: 2em;
             background: linear-gradient(90deg, #0bbb95 0%, #4fa3d1 80%, #8fd6fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -122,7 +184,7 @@
             transition: transform 0.16s, box-shadow 0.18s, background 0.18s;
             min-height: 155px;
             font-family: 'Arabic Typesetting', serif;
-            font-size: 1.08em;
+            font-size: 1.05em;
         }
         .section:hover, .section:focus-visible {
             transform: translateY(-7px) scale(1.025);
@@ -130,7 +192,7 @@
             background: linear-gradient(135deg, #e6f6fd 0%, #d4fafd 100%);
         }
         .section h2 {
-            font-size: 1.18em;
+            font-size: 1.13em;
             font-family: 'Arabic Typesetting', serif;
             font-weight: bold;
             color: #4fa3d1;
@@ -140,22 +202,10 @@
         }
         .section p {
             color: #23425a;
-            font-size: 1.04em;
+            font-size: 1.02em;
             margin-bottom: 6px;
             font-family: 'Arabic Typesetting', serif;
             font-weight: normal;
-        }
-        .hijri-calendar {
-            background: #fafdff;
-            border-radius: 8px;
-            padding: 12px 18px;
-            text-align: center;
-            box-shadow: 0 2px 8px #8fd6fb22;
-            font-weight: bold;
-            font-size: 1.07em;
-            color: #0bbb95;
-            border: 2.2px solid #0bbb95;
-            font-family: 'Arabic Typesetting', serif;
         }
         .footer {
             background: linear-gradient(90deg,#0bbb95 0%,#4fa3d1 70%,#8fd6fb 100%);
@@ -164,40 +214,30 @@
             padding: 16px;
             border-radius: 18px 18px 0 0;
             margin-top: 38px;
-            font-size: 1.08em;
+            font-size: 1em;
             letter-spacing: 1px;
             font-family: 'Arabic Typesetting', serif;
             box-shadow: 0 -2px 18px #8fd6fb66;
             font-weight: bold;
         }
-        @media (max-width: 900px) {
-            .main-container {padding: 18px 5px;}
-            .sections {gap: 16px;}
-            .section {padding: 15px 6px;}
-        }
-        @media (max-width: 650px) {
-            .navbar {flex-direction: column; padding: 0 12px;}
-            .main-container {padding: 10px 2px 18px 2px;}
-            .sections {grid-template-columns: 1fr;}
-            .navbar nav ul {flex-direction: column; gap: 10px;}
-        }
-        @media (max-width: 480px) {
-            .main-container h1 {font-size: 1.1em;}
-            .section h2 {font-size: 1em;}
-            .section {font-size: .97em;}
-        }
     </style>
 </head>
 <body>
     <header class="navbar">
-        <div class="logo">منصة فزارة التعليمية</div>
-        <nav>
-            <ul>
-                <li><a href="login.html">تسجيل الدخول</a></li>
-                <li><a href="register.html">تسجيل جديد</a></li>
-                <li><a href="contact.html">تواصل معنا</a></li>
-            </ul>
-        </nav>
+        <div class="navbar-content">
+            <div class="logo">منصة فزارة التعليمية</div>
+            <div class="date-calendar-row">
+                <span class="date-part" id="greg-day"></span>
+                <span class="date-part" id="gregorian-date"></span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="login.html">تسجيل الدخول</a></li>
+                    <li><a href="register.html">تسجيل جديد</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <div class="main-container">
         <h1>أهل فزارة الكرام شبابها وبناتها ورجالها وفتيانها ...السلام عليكم ورحمة الله وبركاته</h1>
@@ -229,56 +269,23 @@
             </div>
         </div>
     </div>
-    <div style="position: fixed; bottom: 18px; left: 28px; z-index: 1000; min-width: 180px;">
-        <div class="hijri-calendar">
-            <span id="hijri-date"></span>
-            <div id="greg-day" style="font-size:0.95em; color:#0bbb95; margin-top:4px;"></div>
-        </div>
-    </div>
     <footer class="footer">
         <p>حقوق النشر © 2025 منصة فزارة التعليمية. د. محمد محمود الفيومي</p>
     </footer>
     <script>
-    // جلب التاريخ الهجري الرسمي لمصر (يدوي حسب ما تعلنه دار الإفتاء)
-    // يمكنك تحديث هذا النص يومياً ليطابق إعلان دار الإفتاء المصرية
-    document.getElementById('hijri-date').innerText = '٧ ذو الحجة ١٤٤٦ هـ';
-    document.getElementById('greg-day').innerText = 'اليوم: الثلاثاء';
-
-    // إذا أردت التحويل التلقائي البرمجي، استخدم الكود التالي بدلاً من السابق (لكن لن يكون مطابقاً للرؤية الشرعية دائماً):
-    /*
-    function toHijri(gYear, gMonth, gDay) {
-        let jd = Math.floor((1461 * (gYear + 4800 + Math.floor((gMonth - 14) / 12))) / 4) +
-            Math.floor((367 * (gMonth - 2 - 12 * (Math.floor((gMonth - 14) / 12)))) / 12) -
-            Math.floor((3 * Math.floor(((gYear + 4900 + Math.floor((gMonth - 14) / 12)) / 100))) / 4) +
-            gDay - 32075;
-        let l = jd - 1948440 + 10632;
-        let n = Math.floor((l - 1) / 10631);
-        l = l - 10631 * n + 354;
-        let j = (Math.floor((10985 - l) / 5316)) *
-            (Math.floor((50 * l) / 17719)) +
-            (Math.floor(l / 5670)) *
-            (Math.floor((43 * l) / 15238));
-        l = l - (Math.floor((30 - j) / 15)) *
-            (Math.floor((17719 * j) / 50)) -
-            (Math.floor(j / 16)) *
-            (Math.floor((15238 * j) / 43)) + 29;
-        let hijriMonth = Math.floor((24 * l) / 709);
-        let hijriDay = l - Math.floor((709 * hijriMonth) / 24);
-        let hijriYear = 30 * n + j - 30;
-        return [hijriYear, hijriMonth, hijriDay];
-    }
-    function getHijriDate() {
+    // إظهار اليوم والتاريخ الميلادي بالعربية تلقائياً
+    function showGregorianDate() {
         const today = new Date();
         const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-        const months = ['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
-        const gregDay = days[today.getDay()];
-        const [hYear, hMonth, hDay] = toHijri(today.getFullYear(), today.getMonth() + 1, today.getDate());
-        document.getElementById('hijri-date').innerText =
-            `التاريخ الهجري: ${hDay} ${months[hMonth - 1]} ${hYear} هـ`;
-        document.getElementById('greg-day').innerText = `اليوم: ${gregDay}`;
+        const months = ['يناير','فبراير','مارس','إبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+        const day = today.getDate();
+        const month = months[today.getMonth()];
+        const year = today.getFullYear();
+        const weekDay = days[today.getDay()];
+        document.getElementById('greg-day').innerText = `اليوم: ${weekDay}`;
+        document.getElementById('gregorian-date').innerText = `${day} ${month} ${year} م`;
     }
-    getHijriDate();
-    */
+    showGregorianDate();
     </script>
 </body>
 </html>
