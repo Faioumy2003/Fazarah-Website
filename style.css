@@ -1,4 +1,3 @@
-/* إضافة تصميم احترافي للواجهة الأساسية */
 body {
     font-family: "Tajawal", sans-serif;
     direction: rtl;
@@ -8,6 +7,7 @@ body {
     background-color: #f4f4f4;
 }
 
+/* شريط التنقل */
 .navbar {
     display: flex;
     flex-wrap: wrap;
@@ -17,12 +17,10 @@ body {
     color: #fff;
     padding: 10px 20px;
 }
-
 .navbar .logo {
     font-size: 1.5em;
     font-weight: bold;
 }
-
 .navbar nav ul {
     list-style: none;
     display: flex;
@@ -31,17 +29,16 @@ body {
     margin: 0;
     padding: 0;
 }
-
 .navbar nav ul li a {
     color: #fff;
     text-decoration: none;
     font-size: 1em;
 }
-
 .navbar nav ul li a:hover {
     text-decoration: underline;
 }
 
+/* الحاوية الرئيسية */
 .main-container {
     text-align: right;
     padding: 20px;
@@ -51,20 +48,19 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 90%;
 }
-
 .main-container h1 {
     font-size: 2em;
     color: #333;
     margin-bottom: 20px;
 }
 
+/* الأقسام */
 .sections {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     margin-top: 30px;
 }
-
 .section {
     background-color: #4CAF50;
     color: #fff;
@@ -73,17 +69,16 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
 }
-
 .section:hover {
     transform: scale(1.05);
     background-color: #3e8e41;
 }
-
 .section h2 {
     margin: 0;
     font-size: 1.5em;
 }
 
+/* الفوتر */
 .footer {
     text-align: center;
     padding: 10px;
@@ -92,6 +87,7 @@ body {
     margin-top: 20px;
 }
 
+/* نموذج التواصل */
 .contact-form {
     max-width: 600px;
     margin: 20px auto;
@@ -101,18 +97,15 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: right;
 }
-
 .contact-form h2 {
     text-align: center;
     margin-bottom: 20px;
 }
-
 .contact-form label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
 }
-
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -121,7 +114,6 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
 .contact-form button {
     padding: 10px;
     background-color: #4CAF50;
@@ -130,70 +122,44 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
-
 .contact-form button:hover {
     background-color: #3e8e41;
 }
 
-.login-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: right;
-}
-
-.login-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.login-container label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.login-container button:hover {
-    background-color: #3e8e41;
-}
-
-/* تحسين التصميم ليكون متجاوبًا مع الأجهزة المحمولة */
+/* استجابة التصميم للجوال */
 @media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
     .navbar nav ul {
         flex-direction: column;
         gap: 10px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
     }
-
     .main-container {
         padding: 10px;
+        margin: 10px;
     }
-
+    .sections {
+        gap: 10px;
+    }
     .section {
         padding: 15px;
     }
+}
 
-    .notifications {
-        padding: 15px;
+@media (max-width: 480px) {
+    .main-container h1 {
+        font-size: 1.2em;
+    }
+    .section h2 {
+        font-size: 1.1em;
+    }
+    .section {
+        font-size: 0.95em;
     }
 }
