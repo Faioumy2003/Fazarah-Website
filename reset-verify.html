@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إعادة تعيين كلمة المرور</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-container">
+    <h2>إعادة تعيين كلمة المرور</h2>
+    <form method="POST" action="php/reset-verify-process.php">
+        <input type="hidden" name="email" value="<?php echo htmlspecialchars($_GET['email'] ?? ''); ?>">
+        <label>كود الاستعادة الذي وصل على بريدك:</label>
+        <input type="text" name="activation_code" required>
+        <label>كلمة المرور الجديدة:</label>
+        <input type="password" name="new_password" required>
+        <button type="submit">تغيير كلمة المرور</button>
+    </form>
+</div>
+</body>
+</html>

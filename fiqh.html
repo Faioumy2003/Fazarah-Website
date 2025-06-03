@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قسم الفقه - منصة فزارة التعليمية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {background: #e6f6fd; font-family: 'Tajawal', Arial, sans-serif;}
+        .navbar {background: #0bbb95; border-radius: 0 0 16px 16px; box-shadow: 0 2px 12px #8fd6fb33;}
+        .navbar .logo {color: #23425a; font-size: 1.6em; font-weight: 700; display: inline-block; padding: 20px 32px 16px 32px;}
+        .navbar nav ul {margin: 0; padding: 0 32px; list-style: none; display: flex; flex-wrap: wrap; gap: 18px;}
+        .navbar nav ul li {display: inline;}
+        .navbar nav ul a {color: #23425a; text-decoration: none; font-weight: 500; font-size: 1.08em; padding: 7px 14px; border-radius: 4px; transition: background 0.2s, color 0.2s;}
+        .navbar nav ul a.active, .navbar nav ul a:hover {background: #13d1a8; color: #fff;}
+        .main-container {max-width: 900px; background: #fff; margin: 30px auto 0; border-radius: 16px; box-shadow: 0 6px 24px #8fd6fb33; padding: 36px 32px 24px 32px;}
+        .tracks-container {display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin-top: 48px; margin-bottom: 40px;}
+        .track-list {background: #fafdff; border: 2px solid #8fd6fb; border-radius: 16px; box-shadow: 0 2px 16px #8fd6fb12; padding: 28px 36px 22px 36px; width: 340px; min-width: 220px;}
+        .track-title {color: #4fa3d1; font-size: 1.25em; font-weight: 700; margin-bottom: 16px; text-align: center;}
+        .track-list ul {list-style: disc inside; color: #23425a; padding: 0 0 0 12px; margin: 0 0 12px 0; font-size: 1.08em; line-height: 2;}
+        .track-btn {display: block; width: 100%; background: linear-gradient(90deg, #4fa3d1 80%, #8fd6fb); color: #fff; border: none; border-radius: 7px; font-size: 1.08em; font-weight: 700; padding: 12px 0; margin: 10px 0 0 0; cursor: pointer; transition: background 0.2s, box-shadow 0.2s; text-align: center; box-shadow: 0 1px 5px #8fd6fb22; text-decoration: none;}
+        .track-btn:hover {background: linear-gradient(90deg, #8fd6fb 30%, #4fa3d1);}
+        .footer {background: #8fd6fb; color: #23425a; text-align: center; padding: 18px; border-radius: 16px 16px 0 0; margin-top: 40px;}
+        @media (max-width: 900px) {.tracks-container {flex-direction: column; gap: 24px;} .track-list {width: 95%; padding: 20px 10px 14px 10px;}}
+    </style>
+</head>
+<body>
+    <!-- Navbar موحدة مع إبراز القسم النشط -->
+    <header class="navbar">
+        <div class="logo">منصة فزارة التعليمية</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="fiqh.html" class="active">قسم الفقه</a></li>
+                <li><a href="hadith.html">قسم الحديث</a></li>
+                <li><a href="aqeedah.html">قسم العقيدة</a></li>
+                <li><a href="lataif.html">قسم اللطائف</a></li>
+                <li><a href="questions.php">قسم السيرة النبوية</a></li>
+                <li><a href="contact.php">تواصل معنا</a></li>
+                <li><a href="php/logout.php">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-container">
+        <h1>قسم الفقه</h1>
+        <p style="color:#23425a;">
+            اختر المسار المناسب لعمرك لتبدأ التعلم في "أحكام العبادات":
+        </p>
+        <div class="tracks-container">
+            <!-- المسار الأول -->
+            <div class="track-list">
+                <div class="track-title">أحكام العبادات (13 سنة فأقل)</div>
+                <ul>
+                    <li>مناسب للأطفال حتى سن 13 سنة.</li>
+                    <li>شرح مبسط وواضح لأحكام الطهارة، الصلاة، الصيام وغير ذلك.</li>
+                    <li>أنشطة وتمارين تفاعلية.</li>
+                </ul>
+                <a href="fiqh_track_kids.php" class="track-btn">دخول المسار</a>
+            </div>
+            <!-- المسار الثاني -->
+            <div class="track-list">
+                <div class="track-title">أحكام العبادات (أكثر من 13 سنة)</div>
+                <ul>
+                    <li>مناسب للناشئة والشباب والبالغين.</li>
+                    <li>شرح مفصل لأحكام العبادات مع أدلتها من الكتاب والسنة.</li>
+                    <li>اختبارات وتقييمات دورية.</li>
+                </ul>
+                <a href="fiqh_track_teens.php" class="track-btn">دخول المسار</a>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>حقوق النشر © 2025 منصة فزارة التعليمية. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>

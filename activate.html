@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تفعيل الحساب</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="auth-container">
+    <h2>تفعيل الحساب</h2>
+    <form method="POST" action="php/activate-process.php">
+        <input type="hidden" name="email" value="<?php echo htmlspecialchars($_GET['email'] ?? ''); ?>">
+        <label>أدخل كود التفعيل الذي وصل إلى بريدك الإلكتروني:</label>
+        <input type="text" name="activation_code" required>
+        <button type="submit">تفعيل</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة فزارة التعليمية</title>
+    <!-- Arabic Typesetting -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @font-face {
+            font-family: 'Arabic Typesetting';
+            src: local('Arabic Typesetting'), local('ArabicTypesetting');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            background: linear-gradient(135deg, #e6f6fd 0%, #fafdff 100%);
+            min-height: 100vh;
+            font-family: 'Arabic Typesetting', serif;
+            color: #23425a;
+            font-size: 1.55em;
+            letter-spacing: 0.1px;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #0bbb95 0%, #8fd6fb 70%, #e6f6fd 100%);
+            box-shadow: 0 3px 22px #8fd6fb33;
+            border-radius: 0 0 32px 32px;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 72px;
+        }
+        .navbar .logo {
+            color: #23425a;
+            font-size: 2.2em;
+            font-family: 'Arabic Typesetting', serif;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 14px #8fd6fb66;
+            padding: 14px 0 8px 0;
+        }
+        .navbar nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar nav ul li a {
+            color: #23425a;
+            font-size: 1.16em;
+            font-family: 'Arabic Typesetting', serif;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 18px 7px 18px;
+            border-radius: 8px;
+            transition: background 0.20s, color 0.18s;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .navbar nav ul li a.active, .navbar nav ul li a:hover {
+            background: #13d1a8;
+            color: #fff;
+            box-shadow: 0 3px 12px #8fd6fb55;
+        }
+        .main-container {
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 6px 32px #8fd6fb33;
+            padding: 46px 38px 38px 38px;
+            position: relative;
+            z-index: 1;
+        }
+        .main-container h1 {
+            font-size: 2.3em;
+            background: linear-gradient(90deg, #0bbb95 0%, #4fa3d1 80%, #8fd6fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            text-align: center;
+            font-family: 'Arabic Typesetting', serif;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            line-height: 1.5;
+        }
+        .main-container .sub-message {
+            font-size: 1.1em;
+            color: #17827e;
+            text-align: center;
+            margin-bottom: 26px;
+            font-family: 'Arabic Typesetting', serif;
+            font-weight: bold;
+            background: #e6f6fd;
+            border-radius: 11px;
+            padding: 12px 0 10px 0;
+            border: 1.5px dashed #4fa3d1;
+            letter-spacing: 1.1px;
+        }
+        .sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+            gap: 30px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .section {
+            background: linear-gradient(135deg, #fafdff 0%, #e6f6fd 100%);
+            border: none;
+            border-radius: 18px;
+            box-shadow: 0 2px 14px #8fd6fb12;
+            padding: 26px 19px 18px 19px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.16s, box-shadow 0.18s, background 0.18s;
+            min-height: 155px;
+            font-family: 'Arabic Typesetting', serif;
+            font-size: 1.08em;
+        }
+        .section:hover, .section:focus-visible {
+            transform: translateY(-7px) scale(1.025);
+            box-shadow: 0 10px 32px #4fa3d150;
+            background: linear-gradient(135deg, #e6f6fd 0%, #d4fafd 100%);
+        }
+        .section h2 {
+            font-size: 1.18em;
+            font-family: 'Arabic Typesetting', serif;
+            font-weight: bold;
+            color: #4fa3d1;
+            margin-bottom: 0.8em;
+            letter-spacing: 1.1px;
+            transition: color 0.2s;
+        }
+        .section p {
+            color: #23425a;
+            font-size: 1.04em;
+            margin-bottom: 6px;
+            font-family: 'Arabic Typesetting', serif;
+            font-weight: normal;
+        }
+        /* Hijri Calendar */
+        .hijri-calendar {
+            background: #fafdff;
+            border-radius: 8px;
+            padding: 12px 18px;
+            text-align: center;
+            box-shadow: 0 2px 8px #8fd6fb22;
+            font-weight: bold;
+            font-size: 1.07em;
+            color: #0bbb95;
+            border: 2.2px solid #0bbb95;
+            font-family: 'Arabic Typesetting', serif;
+        }
+        .footer {
+            background: linear-gradient(90deg,#0bbb95 0%,#4fa3d1 70%,#8fd6fb 100%);
+            color: #fff;
+            text-align: center;
+            padding: 16px;
+            border-radius: 18px 18px 0 0;
+            margin-top: 38px;
+            font-size: 1.08em;
+            letter-spacing: 1px;
+            font-family: 'Arabic Typesetting', serif;
+            box-shadow: 0 -2px 18px #8fd6fb66;
+            font-weight: bold;
+        }
+        @media (max-width: 900px) {
+            .main-container {padding: 18px 5px;}
+            .sections {gap: 16px;}
+            .section {padding: 15px 6px;}
+        }
+        @media (max-width: 650px) {
+            .navbar {flex-direction: column; padding: 0 12px;}
+            .main-container {padding: 10px 2px 18px 2px;}
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">منصة فزارة التعليمية</div>
+        <nav>
+            <ul>
+                <li><a href="login.html">تسجيل الدخول</a></li>
+                <li><a href="register.html">تسجيل جديد</a></li>
+                <li><a href="contact.html">تواصل معنا</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-container">
+        <h1>أهل فزارة الكرام شبابها وبناتها ورجالها وفتيانها ...السلام عليكم ورحمة الله وبركاته</h1>
+        <div class="sub-message">
+            يا غوالي...هدفنا أن نتعلم ما لا يسع المسلم جهله بمسارات مختلفة متناسبة مع أعماركم، وربنا الرحمن المستعان
+        </div>
+        <div class="sections">
+            <a href="fiqh.html" style="text-decoration:none;color:inherit;">
+                <div class="section" id="fiqh" style="cursor:pointer;">
+                    <h2>قسم الفقه</h2>
+                    <p>محتوى قسم الفقه...</p>
+                </div>
+            </a>
+            <div class="section" id="hadith">
+                <h2>قسم الحديث وعلومه</h2>
+                <p>محتوى قسم الحديث وعلومه...</p>
+            </div>
+            <div class="section" id="aqeedah">
+                <h2>قسم العقيدة</h2>
+                <p>محتوى قسم العقيدة...</p>
+            </div>
+            <div class="section" id="lataif">
+                <h2>قسم اللطائف</h2>
+                <p>محتوى قسم اللطائف...</p>
+            </div>
+            <div class="section" id="questions">
+                <h2>قسم السيرة النبوية</h2>
+                <p>محتوى قسم السيرة...</p>
+            </div>
+        </div>
+       
+            </div>
+        </div>
+    </div>
+    <div style="position: fixed; bottom: 18px; left: 28px; z-index: 1000; min-width: 180px;">
+        <div class="hijri-calendar">
+            <span id="hijri-date"></span>
+            <div id="greg-day" style="font-size:0.95em; color:#0bbb95; margin-top:4px;"></div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>حقوق النشر © 2025 منصة فزارة التعليمية. د. محمد محمود الفيومي</p>
+    </footer>
+    <script>
+    // تقويم هجري مع اليوم
+    function getHijriDate() {
+        const today = new Date();
+        const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+        const gregDay = days[today.getDay()];
+        // تحويل تقريبي (يمكن استبداله بمكتبة متخصصة)
+        const hijriYear = today.getFullYear() - 579;
+        const hijriMonth = today.getMonth() + 1;
+        const hijriDay = today.getDate();
+        document.getElementById('hijri-date').innerText = `${hijriDay} / ${hijriMonth} / ${hijriYear} هـ`;
+        document.getElementById('greg-day').innerText = `اليوم: ${gregDay}`;
+    }
+    getHijriDate();
+    </script>
+</body>
+</html>

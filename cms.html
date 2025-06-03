@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة المحتوى</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .main-container { max-width: 800px; margin: 0 auto; }
+        .content-table table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .content-table th, .content-table td { border: 1px solid #ccc; padding: 8px; }
+        .content-table th { background: #f3f3e9; }
+        form { background: #f9f9f9; padding: 16px; border-radius: 8px; margin-bottom: 20px; }
+        label { display: block; margin-top: 10px; }
+        button { margin: 8px 2px; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">منصة فزارة التعليمية</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="fiqh.html">قسم الفقه</a></li>
+                <li><a href="hadith.html">قسم الحديث</a></li>
+                <li><a href="aqeedah.html">قسم العقيدة</a></li>
+                <li><a href="lataif.html">قسم اللطائف</a></li>
+                <li><a href="questions.html">قسم الأسئلة</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="main-container">
+        <h1>إدارة المحتوى</h1>
+        <form id="cms-form">
+            <input type="hidden" id="content-id" name="id">
+            <label for="section">اختر القسم:</label>
+            <select id="section" name="section">
+                <option value="قسم الفقه">قسم الفقه</option>
+                <option value="قسم الحديث">قسم الحديث</option>
+                <option value="قسم العقيدة">قسم العقيدة</option>
+                <option value="قسم اللطائف">قسم اللطائف</option>
+                <option value="قسم الأسئلة">قسم الأسئلة</option>
+            </select>
+            <label for="content">المحتوى:</label>
+            <textarea id="content" name="content" rows="5"></textarea>
+            <button type="submit">إضافة المحتوى</button>
+            <button type="button" id="edit-btn">تعديل المحتوى</button>
+            <button type="button" id="delete-btn">حذف المحتوى</button>
+        </form>
+        <div class="content-table">
+            <h2>المحتوى الحالي</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>القسم</th>
+                        <th>المحتوى</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="content-list"></tbody>
+            </table>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>حقوق النشر © 2025 منصة فزارة التعليمية. جميع الحقوق محفوظة.</p>
+    </footer>
+    <script>
+    let editMode = false;
+    let editingId = null;
+
+    function fetchContents() {
+        fetch('php/cms-handler.php')
+        .then(res => res.json())
+        .then(data => {
+            const tbody = document.getElementById('content-list');
+            tbody.innerHTML = '';
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.section}</td>
+                    <td>${item.content}</td>
+                    <td>
+                        <button onclick="editContent(${item.id}, '${item.section}', \`${item.content.replace(/`/g, '\\`')}\`)">تعديل</button>
+                        <button onclick="deleteContent(${item.id})">حذف</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        });
+    }
+
+    window.editContent = function(id, section, content) {
+        document.getElementById('content-id').value = id;
+        document.getElementById('section').value = section;
+        document.getElementById('content').value = content;
+        editMode = true;
+        editingId = id;
+    }
+
+    window.deleteContent = function(id) {
+        if(confirm('هل أنت متأكد من حذف هذا المحتوى؟')) {
+            fetch('php/cms-handler.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: `action=delete&id=${id}`
+            }).then(res => res.text())
+              .then(msg => { alert(msg); fetchContents(); });
+        }
+    }
+
+    document.getElementById('cms-form').onsubmit = function(e) {
+        e.preventDefault();
+        const section = document.getElementById('section').value;
+        const content = document.getElementById('content').value;
+        const id = document.getElementById('content-id').value;
+        const action = editMode ? 'edit' : 'add';
+        let body = `action=${action}&section=${encodeURIComponent(section)}&content=${encodeURIComponent(content)}`;
+        if(editMode) body += `&id=${id}`;
+        fetch('php/cms-handler.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body
+        }).then(res => res.text())
+          .then(msg => {
+            alert(msg);
+            editMode = false;
+            editingId = null;
+            document.getElementById('cms-form').reset();
+            fetchContents();
+        });
+    };
+
+    document.getElementById('edit-btn').onclick = function() {
+        if(editMode && editingId) {
+            document.getElementById('cms-form').dispatchEvent(new Event('submit'));
+        } else {
+            alert('اختر محتوى للتعديل أولاً.');
+        }
+    };
+
+    document.getElementById('delete-btn').onclick = function() {
+        if(editMode && editingId) {
+            deleteContent(editingId);
+            editMode = false;
+            editingId = null;
+            document.getElementById('cms-form').reset();
+        } else {
+            alert('اختر محتوى للحذف أولاً.');
+        }
+    };
+
+    fetchContents();
+    </script>
+</body>
+</html>
