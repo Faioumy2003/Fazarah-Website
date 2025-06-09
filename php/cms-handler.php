@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: ../login.html');
+    exit;
+}
+
 require_once 'db.php';
 
 // ... استقبال باقي بيانات الدرس السابقة
