@@ -1,8 +1,7 @@
 <?php
-// بدء جلسة المستخدم
+// نسخة من register-handler.php لنقلها إلى مجلد php/
 session_start();
 
-// الاتصال بقاعدة البيانات
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -13,9 +12,6 @@ if ($conn->connect_error) {
     die("فشل الاتصال بقاعدة البيانات: " . $conn->connect_error);
 }
 
-// ملاحظة هامة: يوصى باستخدام SMTP احترافي أو مكتبة مثل PHPMailer لإرسال البريد الإلكتروني بشكل آمن وموثوق عند رفع الموقع على الاستضافة، بدلاً من الدالة mail() الافتراضية.
-
-// إضافة التحقق من البريد الإلكتروني
 function sendVerificationEmail($email, $token) {
     $subject = "تأكيد البريد الإلكتروني";
     $message = "يرجى الضغط على الرابط التالي لتأكيد بريدك الإلكتروني: \n";
@@ -24,15 +20,17 @@ function sendVerificationEmail($email, $token) {
     mail($email, $subject, $message, $headers);
 }
 
-// إضافة حماية ضد الرسائل غير المرغوب فيها
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die('طلب غير صالح.');
 }
 
-// التحقق من صحة الإدخال
 $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 $confirm = filter_var($_POST['confirm-password'], FILTER_SANITIZE_STRING);
+$first = filter_var($_POST['first_name'], FILTER_SANITIZE_STRING);
+$last = filter_var($_POST['last_name'], FILTER_SANITIZE_STRING);
+$gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+$national_id = filter_var($_POST['national_id'], FILTER_SANITIZE_STRING);
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     die('البريد الإلكتروني غير صالح.');
@@ -42,6 +40,9 @@ if ($password !== $confirm) {
 }
 if (strlen($password) < 6) {
     die('كلمة المرور يجب أن تكون 6 أحرف على الأقل.');
+}
+if (!$first || !$last || !$gender || !$national_id) {
+    die('يرجى ملء جميع الحقول المطلوبة.');
 }
 
 $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
@@ -56,10 +57,11 @@ $stmt->close();
 $hashed = password_hash($password, PASSWORD_DEFAULT);
 $token = bin2hex(random_bytes(16));
 
-$stmt = $conn->prepare("INSERT INTO users (email, password, token) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $email, $hashed, $token);
+$stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, gender, national_id, is_active, activation_code) VALUES (?, ?, ?, ?, ?, ?, 0, ?)");
+$activation_code = bin2hex(random_bytes(16));
+$stmt->bind_param("sssssss", $first, $last, $email, $hashed, $gender, $national_id, $activation_code);
 if ($stmt->execute()) {
-    sendVerificationEmail($email, $token);
+    sendVerificationEmail($email, $activation_code);
     echo 'تم التسجيل بنجاح. يرجى التحقق من بريدك الإلكتروني لتأكيد الحساب.';
 } else {
     echo 'حدث خطأ أثناء التسجيل.';
