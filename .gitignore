@@ -1,0 +1,12 @@
+# Ignore sensitive files and system files
+.env
+*.env
+*.log
+*.sqlite
+*.db
+*.DS_Store
+node_modules/
+vendor/
+.idea/
+.vscode/
+*.bak
